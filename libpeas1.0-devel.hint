@@ -1,4 +1,4 @@
-category; Gnome
+category: Gnome
 requires: libpeas1.0_0 libgirepository1.0-devel libglib2.0-devel libgtk3-devel
 external-source: libpeas
 sdesc: "GNOME plugins engine library (development)"

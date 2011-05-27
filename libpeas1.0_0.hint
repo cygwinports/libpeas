@@ -1,4 +1,4 @@
-category; Gnome
+category: Gnome
 requires: libpeas-common libgirepository1.0_1 libglib2.0_0 libgtk3_0 libseed-gtk3_0 python python-gi
 external-source: libpeas
 sdesc: "GNOME plugins engine library (runtime)"

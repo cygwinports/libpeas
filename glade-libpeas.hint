@@ -1,4 +1,4 @@
-category; Gnome
+category: Gnome
 requires: libpeas1.0_0 glade
 external-source: libpeas
 sdesc: "GNOME plugins engine library (Glade plugin)"
