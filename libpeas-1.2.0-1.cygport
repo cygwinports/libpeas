@@ -3,9 +3,15 @@ inherit gnome2
 DESCRIPTION="GNOME plugins engine library"
 
 PATCH_URI="
-	1.0.0-no-undefined.patch
+	1.2.0-no-undefined.patch
 	1.0.0-cygwin-glade.patch
 "
+
+DEPEND="gnome-common
+	girepository(GIRepository-2.0)
+	girepository(Gtk-3.0)
+	pkgconfig(gtk+-3.0)
+	pkgconfig(pygobject-3.0)"
 
 PKG_NAMES="libpeas1.0_0 libpeas1.0-devel libpeas-common girepository-Peas1.0 glade-libpeas"
 libpeas_common_CONTENTS="etc/ usr/share/icons/ usr/share/locale/"
@@ -14,3 +20,5 @@ libpeas1_0_devel_CONTENTS="usr/include/ usr/lib/libpeas*-1.0.* usr/lib/pkgconfig
 girepository_Peas1_0_CONTENTS="usr/*/gir*/Peas*-1.0.*"
 glade_libpeas_CONTENTS="usr/share/glade/"
 PKG_IGNORE="usr/bin/peas-demo* usr/lib/peas-demo/"
+
+CYGCONF_ARGS="--disable-gjs --disable-seed --enable-python --enable-vala"

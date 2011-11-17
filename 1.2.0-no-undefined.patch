@@ -1,0 +1,170 @@
+--- origsrc/libpeas-1.2.0/configure.ac	2011-11-17 04:14:09.841847000 -0600
++++ src/libpeas-1.2.0/configure.ac	2011-11-16 17:42:50.419268000 -0600
+@@ -442,9 +442,9 @@ AC_SUBST(LT_AGE)
+ # The reasons for -rpath /nowhere can be found at:
+ # http://www.mail-archive.com/automake@gnu.org/msg10725.htm
+ 
+-PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
++PLUGIN_LIBTOOL_FLAGS="-module -avoid-version -no-undefined"
+ TEST_PLUGIN_LIBTOOL_FLAGS="$PLUGIN_LIBTOOL_FLAGS -rpath /nowhere"
+-LOADER_LIBTOOL_FLAGS="-module -avoid-version -export-symbols-regex peas_register_types"
++LOADER_LIBTOOL_FLAGS="-module -avoid-version -no-undefined -export-symbols-regex peas_register_types"
+ AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
+ AC_SUBST(TEST_PLUGIN_LIBTOOL_FLAGS)
+ AC_SUBST(LOADER_LIBTOOL_FLAGS)
+--- origsrc/libpeas-1.2.0/loaders/c/Makefile.am	2011-11-17 04:14:09.870848700 -0600
++++ src/libpeas-1.2.0/loaders/c/Makefile.am	2011-11-16 13:35:38.000000000 -0600
+@@ -16,7 +16,7 @@ libcloader_la_SOURCES = \
+ 	peas-plugin-loader-c.h
+ 
+ libcloader_la_LDFLAGS = $(LOADER_LIBTOOL_FLAGS) $(GCOV_LDFLAGS)
+-libcloader_la_LIBADD = $(PEAS_LIBS)
++libcloader_la_LIBADD = $(top_builddir)/libpeas/libpeas-1.0.la $(PEAS_LIBS)
+ 
+ gcov_sources = $(libcloader_la_SOURCES)
+ include $(top_srcdir)/Makefile.gcov
+--- origsrc/libpeas-1.2.0/loaders/python/Makefile.am	2011-11-17 04:14:09.880849300 -0600
++++ src/libpeas-1.2.0/loaders/python/Makefile.am	2011-11-16 13:35:38.000000000 -0600
+@@ -25,6 +25,7 @@ libpythonloader_la_LDFLAGS = \
+ 	$(GCOV_LDFLAGS)
+ 
+ libpythonloader_la_LIBADD = \
++	$(top_builddir)/libpeas/libpeas-1.0.la \
+ 	$(PEAS_LIBS)			\
+ 	$(PYTHON_LIBS)
+ 
+--- origsrc/libpeas-1.2.0/loaders/seed/Makefile.am	2011-11-17 04:14:09.886849600 -0600
++++ src/libpeas-1.2.0/loaders/seed/Makefile.am	2011-11-16 13:35:38.000000000 -0600
+@@ -19,7 +19,7 @@ libseedloader_la_SOURCES = \
+ 	peas-plugin-loader-seed.h
+ 
+ libseedloader_la_LDFLAGS = $(LOADER_LIBTOOL_FLAGS) $(GCOV_LDFLAGS)
+-libseedloader_la_LIBADD = $(PEAS_LIBS) $(SEED_LIBS)
++libseedloader_la_LIBADD = $(top_builddir)/libpeas/libpeas-1.0.la $(PEAS_LIBS) $(SEED_LIBS)
+ 
+ gcov_sources = $(libseedloader_la_SOURCES)
+ include $(top_srcdir)/Makefile.gcov
+--- origsrc/libpeas-1.2.0/peas-demo/plugins/helloworld/Makefile.am	2011-11-17 04:14:09.888849700 -0600
++++ src/libpeas-1.2.0/peas-demo/plugins/helloworld/Makefile.am	2011-11-16 13:35:38.000000000 -0600
+@@ -14,7 +14,10 @@ libhelloworld_la_SOURCES = \
+ 	peasdemo-hello-world-configurable.c
+ 
+ libhelloworld_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+-libhelloworld_la_LIBADD  = $(PEAS_LIBS) $(PEAS_GTK_LIBS)
++libhelloworld_la_LIBADD  = \
++	$(top_builddir)/libpeas-gtk/libpeas-gtk-1.0.la \
++	$(top_builddir)/libpeas/libpeas-1.0.la \
++	$(PEAS_LIBS) $(PEAS_GTK_LIBS)
+ 
+ plugin_DATA = helloworld.plugin
+ 
+--- origsrc/libpeas-1.2.0/peas-demo/plugins/secondtime/Makefile.am	2011-11-17 04:14:09.890849800 -0600
++++ src/libpeas-1.2.0/peas-demo/plugins/secondtime/Makefile.am	2011-11-16 13:35:38.000000000 -0600
+@@ -12,7 +12,10 @@ libsecondtime_la_SOURCES = \
+ 	second-time.c
+ 
+ libsecondtime_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+-libsecondtime_la_LIBADD  = $(PEAS_LIBS) $(PEAS_GTK_LIBS)
++libsecondtime_la_LIBADD  = \
++	$(top_builddir)/libpeas-gtk/libpeas-gtk-1.0.la \
++	$(top_builddir)/libpeas/libpeas-1.0.la \
++	$(PEAS_LIBS) $(PEAS_GTK_LIBS)
+ 
+ plugin_DATA = secondtime.plugin
+ 
+--- origsrc/libpeas-1.2.0/peas-demo/plugins/valahello/Makefile.am	2011-11-17 04:14:09.892849900 -0600
++++ src/libpeas-1.2.0/peas-demo/plugins/valahello/Makefile.am	2011-11-16 13:35:38.000000000 -0600
+@@ -15,7 +15,10 @@ plugin_LTLIBRARIES = libvalahello.la
+ libvalahello_la_SOURCES = peasdemo-vala-hello-plugin.vala
+ 
+ libvalahello_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
+-libvalahello_la_LIBADD  = $(PEAS_LIBS) $(PEAS_GTK_LIBS)
++libvalahello_la_LIBADD  = \
++	$(top_builddir)/libpeas-gtk/libpeas-gtk-1.0.la \
++	$(top_builddir)/libpeas/libpeas-1.0.la \
++	$(PEAS_LIBS) $(PEAS_GTK_LIBS)
+ 
+ plugin_DATA = valahello.plugin
+ 
+--- origsrc/libpeas-1.2.0/tests/libpeas/plugins/extension-c/Makefile.am	2011-09-24 13:56:12.000000000 -0500
++++ src/libpeas-1.2.0/tests/libpeas/plugins/extension-c/Makefile.am	2011-11-16 18:03:29.991167400 -0600
+@@ -17,6 +17,7 @@ libextension_c_la_SOURCES = \
+ 
+ libextension_c_la_LDFLAGS = $(TEST_PLUGIN_LIBTOOL_FLAGS)
+ libextension_c_la_LIBADD = \
++	$(top_builddir)/libpeas/libpeas-1.0.la \
+ 	$(PEAS_LIBS)						\
+ 	$(builddir)/../../introspection/libintrospection-1.0.la
+ 
+--- origsrc/libpeas-1.2.0/tests/libpeas-gtk/plugins/builtin-configurable/Makefile.am	2011-09-03 02:31:03.000000000 -0500
++++ src/libpeas-1.2.0/tests/libpeas-gtk/plugins/builtin-configurable/Makefile.am	2011-11-16 18:08:00.319629300 -0600
+@@ -16,7 +16,10 @@ libbuiltin_configurable_la_SOURCES = \
+ 	builtin-configurable.h
+ 
+ libbuiltin_configurable_la_LDFLAGS = $(TEST_PLUGIN_LIBTOOL_FLAGS)
+-libbuiltin_configurable_la_LIBADD  = $(PEAS_LIBS) $(PEAS_GTK_LIBS)
++libbuiltin_configurable_la_LIBADD  = \
++	$(top_builddir)/libpeas-gtk/libpeas-gtk-1.0.la \
++	$(top_builddir)/libpeas/libpeas-1.0.la \
++	$(PEAS_LIBS) $(PEAS_GTK_LIBS)
+ 
+ noinst_PLUGIN = builtin-configurable.plugin
+ 
+--- origsrc/libpeas-1.2.0/tests/libpeas-gtk/plugins/configurable/Makefile.am	2011-09-03 02:31:03.000000000 -0500
++++ src/libpeas-1.2.0/tests/libpeas-gtk/plugins/configurable/Makefile.am	2011-11-16 18:08:20.083759800 -0600
+@@ -14,7 +14,10 @@ libconfigurable_la_SOURCES = \
+ 	configurable-plugin.h
+ 
+ libconfigurable_la_LDFLAGS = $(TEST_PLUGIN_LIBTOOL_FLAGS)
+-libconfigurable_la_LIBADD  = $(PEAS_LIBS) $(PEAS_GTK_LIBS)
++libconfigurable_la_LIBADD  = \
++	$(top_builddir)/libpeas-gtk/libpeas-gtk-1.0.la \
++	$(top_builddir)/libpeas/libpeas-1.0.la \
++	$(PEAS_LIBS) $(PEAS_GTK_LIBS)
+ 
+ noinst_PLUGIN = configurable.plugin
+ 
+--- origsrc/libpeas-1.2.0/tests/plugins/builtin/Makefile.am	2011-09-03 02:31:03.000000000 -0500
++++ src/libpeas-1.2.0/tests/plugins/builtin/Makefile.am	2011-11-16 17:56:40.999774500 -0600
+@@ -13,7 +13,7 @@ libbuiltin_la_SOURCES = \
+ 	builtin-plugin.h
+ 
+ libbuiltin_la_LDFLAGS = $(TEST_PLUGIN_LIBTOOL_FLAGS)
+-libbuiltin_la_LIBADD  = $(PEAS_LIBS)
++libbuiltin_la_LIBADD  = $(top_builddir)/libpeas/libpeas-1.0.la $(PEAS_LIBS)
+ 
+ noinst_PLUGIN = builtin.plugin
+ 
+--- origsrc/libpeas-1.2.0/tests/plugins/has-dep/Makefile.am	2011-09-03 02:31:03.000000000 -0500
++++ src/libpeas-1.2.0/tests/plugins/has-dep/Makefile.am	2011-11-16 17:57:07.992318400 -0600
+@@ -13,7 +13,7 @@ libhas_dep_la_SOURCES = \
+ 	has-dep-plugin.h
+ 
+ libhas_dep_la_LDFLAGS = $(TEST_PLUGIN_LIBTOOL_FLAGS)
+-libhas_dep_la_LIBADD  = $(PEAS_LIBS)
++libhas_dep_la_LIBADD  = $(top_builddir)/libpeas/libpeas-1.0.la $(PEAS_LIBS)
+ 
+ noinst_PLUGIN = has-dep.plugin
+ 
+--- origsrc/libpeas-1.2.0/tests/plugins/loadable/Makefile.am	2011-09-03 02:31:03.000000000 -0500
++++ src/libpeas-1.2.0/tests/plugins/loadable/Makefile.am	2011-11-16 17:57:56.554095900 -0600
+@@ -13,7 +13,7 @@ libloadable_la_SOURCES = \
+ 	loadable-plugin.h
+ 
+ libloadable_la_LDFLAGS = $(TEST_PLUGIN_LIBTOOL_FLAGS)
+-libloadable_la_LIBADD  = $(PEAS_LIBS)
++libloadable_la_LIBADD  = $(top_builddir)/libpeas/libpeas-1.0.la $(PEAS_LIBS)
+ 
+ noinst_PLUGIN = loadable.plugin
+ 
+--- origsrc/libpeas-1.2.0/tests/plugins/self-dep/Makefile.am	2011-09-03 02:31:03.000000000 -0500
++++ src/libpeas-1.2.0/tests/plugins/self-dep/Makefile.am	2011-11-16 17:58:02.113413900 -0600
+@@ -13,7 +13,7 @@ libself_dep_la_SOURCES = \
+ 	self-dep-plugin.h
+ 
+ libself_dep_la_LDFLAGS = $(TEST_PLUGIN_LIBTOOL_FLAGS)
+-libself_dep_la_LIBADD  = $(PEAS_LIBS)
++libself_dep_la_LIBADD  = $(top_builddir)/libpeas/libpeas-1.0.la $(PEAS_LIBS)
+ 
+ noinst_PLUGIN = self-dep.plugin
+ 
