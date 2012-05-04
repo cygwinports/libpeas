@@ -1,27 +1,28 @@
---- origsrc/libpeas-1.2.0/configure.ac	2011-11-17 04:14:09.841847000 -0600
-+++ src/libpeas-1.2.0/configure.ac	2011-11-16 17:42:50.419268000 -0600
-@@ -442,9 +442,9 @@ AC_SUBST(LT_AGE)
+--- origsrc/libpeas-1.4.0/configure.ac
++++ src/libpeas-1.4.0/configure.ac
+@@ -437,10 +437,10 @@ AC_SUBST(LT_AGE)
  # The reasons for -rpath /nowhere can be found at:
  # http://www.mail-archive.com/automake@gnu.org/msg10725.htm
  
 -PLUGIN_LIBTOOL_FLAGS="-module -avoid-version"
 +PLUGIN_LIBTOOL_FLAGS="-module -avoid-version -no-undefined"
  TEST_PLUGIN_LIBTOOL_FLAGS="$PLUGIN_LIBTOOL_FLAGS -rpath /nowhere"
+ TEST_INTROSPECTION_LIBTOOL_FLAGS="-rpath /nowhere -export-dynamic -no-undefined"
 -LOADER_LIBTOOL_FLAGS="-module -avoid-version -export-symbols-regex peas_register_types"
 +LOADER_LIBTOOL_FLAGS="-module -avoid-version -no-undefined -export-symbols-regex peas_register_types"
  AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
  AC_SUBST(TEST_PLUGIN_LIBTOOL_FLAGS)
- AC_SUBST(LOADER_LIBTOOL_FLAGS)
---- origsrc/libpeas-1.2.0/loaders/c/Makefile.am	2011-11-17 04:14:09.870848700 -0600
-+++ src/libpeas-1.2.0/loaders/c/Makefile.am	2011-11-16 13:35:38.000000000 -0600
-@@ -16,7 +16,7 @@ libcloader_la_SOURCES = \
- 	peas-plugin-loader-c.h
+ AC_SUBST(TEST_INTROSPECTION_LIBTOOL_FLAGS)
+--- origsrc/libpeas-1.2.0/loaders/gjs/Makefile.am
++++ src/libpeas-1.2.0/loaders/gjs/Makefile.am
+@@ -19,7 +19,7 @@ libgjsloader_la_SOURCES = \
+ 	peas-plugin-loader-gjs.h
  
- libcloader_la_LDFLAGS = $(LOADER_LIBTOOL_FLAGS) $(GCOV_LDFLAGS)
--libcloader_la_LIBADD = $(PEAS_LIBS)
-+libcloader_la_LIBADD = $(top_builddir)/libpeas/libpeas-1.0.la $(PEAS_LIBS)
+ libgjsloader_la_LDFLAGS = $(LOADER_LIBTOOL_FLAGS) $(GCOV_LDFLAGS)
+-libgjsloader_la_LIBADD = $(PEAS_LIBS) $(GJS_LIBS)
++libgjsloader_la_LIBADD = $(top_builddir)/libpeas/libpeas-1.0.la $(PEAS_LIBS) $(GJS_LIBS)
  
- gcov_sources = $(libcloader_la_SOURCES)
+ gcov_sources = $(libgjsloader_la_SOURCES)
  include $(top_srcdir)/Makefile.gcov
 --- origsrc/libpeas-1.2.0/loaders/python/Makefile.am	2011-11-17 04:14:09.880849300 -0600
 +++ src/libpeas-1.2.0/loaders/python/Makefile.am	2011-11-16 13:35:38.000000000 -0600

@@ -3,7 +3,7 @@ inherit gnome2
 DESCRIPTION="GNOME plugins engine library"
 
 PATCH_URI="
-	1.2.0-no-undefined.patch
+	1.4.0-no-undefined.patch
 	1.0.0-cygwin-glade.patch
 "
 
@@ -22,3 +22,5 @@ glade_libpeas_CONTENTS="usr/share/glade/"
 PKG_IGNORE="usr/bin/peas-demo* usr/lib/peas-demo/"
 
 CYGCONF_ARGS="--disable-gjs --disable-seed --enable-python --enable-vala"
+
+KEEP_LA_FILES="none"
