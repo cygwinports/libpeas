@@ -1,6 +1,13 @@
 inherit gnome2
 
-DESCRIPTION="GNOME plugins engine library"
+NAME="libpeas"
+VERSION=1.6.2
+RELEASE=1
+CATEGORY="GNOME"
+SUMMARY="GNOME plugins engine library"
+DESCRIPTION="libpeas is a gobject-based plugins engine, and is targetted at
+giving every application the chance to assume its own extensibility. It is
+currently used by several Gnome applications like gedit and Totem."
 
 PATCH_URI="
 	1.4.0-no-undefined.patch
@@ -15,12 +22,12 @@ DEPEND="gnome-common
 
 PKG_NAMES="libpeas1.0_0 libpeas1.0-devel libpeas-common girepository-Peas1.0 glade-libpeas"
 libpeas_common_CONTENTS="etc/ usr/share/icons/ usr/share/locale/"
+libpeas1_0_0_REQUIRES="libpeas-common"
 libpeas1_0_0_CONTENTS="usr/bin/*-1.0-0.dll usr/lib/libpeas-1.0/ usr/share/doc/"
 libpeas1_0_devel_CONTENTS="usr/include/ usr/lib/libpeas*-1.0.* usr/lib/pkgconfig/ usr/share/gtk-doc/"
 girepository_Peas1_0_CONTENTS="usr/*/gir*/Peas*-1.0.*"
+glade_libpeas_REQUIRES="glade libpeas1.0_0"
 glade_libpeas_CONTENTS="usr/share/glade/"
 PKG_IGNORE="usr/bin/peas-demo* usr/lib/peas-demo/"
 
 CYGCONF_ARGS="--disable-gjs --disable-seed --enable-python --enable-vala"
-
-KEEP_LA_FILES="none"

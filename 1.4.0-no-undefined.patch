@@ -73,20 +73,6 @@
  
  plugin_DATA = secondtime.plugin
  
---- origsrc/libpeas-1.2.0/peas-demo/plugins/valahello/Makefile.am	2011-11-17 04:14:09.892849900 -0600
-+++ src/libpeas-1.2.0/peas-demo/plugins/valahello/Makefile.am	2011-11-16 13:35:38.000000000 -0600
-@@ -15,7 +15,10 @@ plugin_LTLIBRARIES = libvalahello.la
- libvalahello_la_SOURCES = peasdemo-vala-hello-plugin.vala
- 
- libvalahello_la_LDFLAGS = $(PLUGIN_LIBTOOL_FLAGS)
--libvalahello_la_LIBADD  = $(PEAS_LIBS) $(PEAS_GTK_LIBS)
-+libvalahello_la_LIBADD  = \
-+	$(top_builddir)/libpeas-gtk/libpeas-gtk-1.0.la \
-+	$(top_builddir)/libpeas/libpeas-1.0.la \
-+	$(PEAS_LIBS) $(PEAS_GTK_LIBS)
- 
- plugin_DATA = valahello.plugin
- 
 --- origsrc/libpeas-1.2.0/tests/libpeas/plugins/extension-c/Makefile.am	2011-09-24 13:56:12.000000000 -0500
 +++ src/libpeas-1.2.0/tests/libpeas/plugins/extension-c/Makefile.am	2011-11-16 18:03:29.991167400 -0600
 @@ -17,6 +17,7 @@ libextension_c_la_SOURCES = \

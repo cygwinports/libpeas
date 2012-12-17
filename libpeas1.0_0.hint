@@ -1,7 +1,0 @@
-category: Gnome
-requires: libpeas-common libgdk_pixbuf2.0_0 libgirepository1.0_1 libglib2.0_0 libgtk3_0 libintl8 python python-gi
-external-source: libpeas
-sdesc: "GNOME plugins engine library (runtime)"
-ldesc: "libpeas is a gobject-based plugins engine, and is targetted at 
-giving every application the chance to assume its own extensibility. It 
-is currently used by several Gnome applications like gedit and Totem."

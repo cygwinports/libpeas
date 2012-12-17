@@ -1,7 +1,0 @@
-category: Gnome
-requires: libpeas1.0_0 girepository-GIRepository2.0 girepository-Gtk3.0
-external-source: libpeas
-sdesc: "GNOME plugins engine library (GObject Introspection data)"
-ldesc: "libpeas is a gobject-based plugins engine, and is targetted at 
-giving every application the chance to assume its own extensibility. It 
-is currently used by several Gnome applications like gedit and Totem."
