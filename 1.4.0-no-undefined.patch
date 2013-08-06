@@ -1,6 +1,6 @@
 --- origsrc/libpeas-1.4.0/configure.ac
 +++ src/libpeas-1.4.0/configure.ac
-@@ -437,10 +437,10 @@ AC_SUBST(LT_AGE)
+@@ -437,12 +437,12 @@ AC_SUBST(LT_AGE)
  # The reasons for -rpath /nowhere can be found at:
  # http://www.mail-archive.com/automake@gnu.org/msg10725.htm
  
@@ -8,8 +8,10 @@
 +PLUGIN_LIBTOOL_FLAGS="-module -avoid-version -no-undefined"
  TEST_PLUGIN_LIBTOOL_FLAGS="$PLUGIN_LIBTOOL_FLAGS -rpath /nowhere"
  TEST_INTROSPECTION_LIBTOOL_FLAGS="-rpath /nowhere -export-dynamic -no-undefined"
--LOADER_LIBTOOL_FLAGS="-module -avoid-version -export-symbols-regex peas_register_types"
-+LOADER_LIBTOOL_FLAGS="-module -avoid-version -no-undefined -export-symbols-regex peas_register_types"
+ # Cannot use "-export-symbols-regex peas_register_types"
+ # because it might make the python plugin loader not work!
+-LOADER_LIBTOOL_FLAGS="-module -avoid-version"
++LOADER_LIBTOOL_FLAGS="-module -avoid-version -no-undefined"
  AC_SUBST(PLUGIN_LIBTOOL_FLAGS)
  AC_SUBST(TEST_PLUGIN_LIBTOOL_FLAGS)
  AC_SUBST(TEST_INTROSPECTION_LIBTOOL_FLAGS)
@@ -24,16 +26,26 @@
  
  gcov_sources = $(libgjsloader_la_SOURCES)
  include $(top_srcdir)/Makefile.gcov
---- origsrc/libpeas-1.2.0/loaders/python/Makefile.am	2011-11-17 04:14:09.880849300 -0600
-+++ src/libpeas-1.2.0/loaders/python/Makefile.am	2011-11-16 13:35:38.000000000 -0600
-@@ -25,6 +25,7 @@ libpythonloader_la_LDFLAGS = \
- 	$(GCOV_LDFLAGS)
+--- origsrc/libpeas-1.8.1/loaders/python/Makefile.am	2013-02-14 06:07:08.000000000 -0600
++++ src/libpeas-1.8.1/loaders/python/Makefile.am	2013-08-05 23:27:29.019305100 -0500
+@@ -27,6 +27,7 @@ libpythonloader_la_LDFLAGS = \
+ 	$(PYTHON2_LDFLAGS)
  
  libpythonloader_la_LIBADD = \
-+	$(top_builddir)/libpeas/libpeas-1.0.la \
++	$(top_builddir)/libpeas/libpeas-1.0.la	\
  	$(PEAS_LIBS)			\
- 	$(PYTHON_LIBS)
+ 	$(PYGOBJECT_LIBS)		\
+ 	$(PYTHON2_LIBS)
+--- origsrc/libpeas-1.8.1/loaders/python3/Makefile.am	2013-02-14 06:07:08.000000000 -0600
++++ src/libpeas-1.8.1/loaders/python3/Makefile.am	2013-08-05 23:27:34.866639500 -0500
+@@ -27,6 +27,7 @@ libpython3loader_la_LDFLAGS = \
+ 	$(PYTHON3_LDFLAGS)
  
+ libpython3loader_la_LIBADD = \
++	$(top_builddir)/libpeas/libpeas-1.0.la	\
+ 	$(PEAS_LIBS)			\
+ 	$(PYGOBJECT_LIBS)		\
+ 	$(PYTHON3_LIBS)
 --- origsrc/libpeas-1.2.0/loaders/seed/Makefile.am	2011-11-17 04:14:09.886849600 -0600
 +++ src/libpeas-1.2.0/loaders/seed/Makefile.am	2011-11-16 13:35:38.000000000 -0600
 @@ -19,7 +19,7 @@ libseedloader_la_SOURCES = \
