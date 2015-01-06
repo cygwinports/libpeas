@@ -1,7 +1,7 @@
 inherit gnome2
 
 NAME="libpeas"
-VERSION=1.8.1
+VERSION=1.12.1
 RELEASE=1
 CATEGORY="Libs"
 SUMMARY="GNOME plugins engine library"
@@ -10,7 +10,6 @@ giving every application the chance to assume its own extensibility. It is
 currently used by several Gnome applications like gedit and Totem."
 
 PATCH_URI="
-	1.4.0-no-undefined.patch
 	1.0.0-cygwin-glade.patch
 "
 
