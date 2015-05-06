@@ -2,7 +2,7 @@ inherit gnome2
 
 NAME="libpeas"
 VERSION=1.12.1
-RELEASE=1
+RELEASE=2
 CATEGORY="Libs"
 SUMMARY="GNOME plugins engine library"
 DESCRIPTION="libpeas is a gobject-based plugins engine, and is targetted at
