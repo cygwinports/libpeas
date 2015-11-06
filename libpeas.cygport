@@ -1,8 +1,8 @@
 inherit gnome2
 
 NAME="libpeas"
-VERSION=1.12.1
-RELEASE=2
+VERSION=1.16.0
+RELEASE=1
 CATEGORY="Libs"
 SUMMARY="GNOME plugins engine library"
 DESCRIPTION="libpeas is a gobject-based plugins engine, and is targetted at
@@ -23,6 +23,7 @@ PKG_NAMES="libpeas1.0_0 libpeas1.0-devel libpeas-common girepository-Peas1.0 gla
 libpeas_common_CONTENTS="etc/ usr/share/icons/ usr/share/locale/"
 libpeas1_0_0_REQUIRES="libpeas-common"
 libpeas1_0_0_CONTENTS="usr/bin/*-1.0-0.dll usr/lib/libpeas-1.0/ usr/share/doc/"
+libpeas1_0_devel_REQUIRES="girepository-Peas1.0"
 libpeas1_0_devel_CONTENTS="usr/include/ usr/lib/libpeas*-1.0.* usr/lib/pkgconfig/ usr/share/gtk-doc/"
 girepository_Peas1_0_CONTENTS="usr/*/gir*/Peas*-1.0.*"
 glade_libpeas_REQUIRES="glade libpeas1.0_0"
